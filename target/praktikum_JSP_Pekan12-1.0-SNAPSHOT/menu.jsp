@@ -13,17 +13,17 @@
         <li class="nav-item">
           <a class="nav-link" href="index.jsp?halaman=about">About Us</a>
         </li>
-        <!--li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Master Data
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="index.jsp?halaman=jenis">Jenis</a></li>
+            <li><a class="dropdown-item" href="index.jsp?halaman=produk">Produk</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">User</a></li>
           </ul>
-        </li-->
+        </li>
         <li class="nav-item">
           <a href="index.jsp?halaman=contact" class="nav-link" aria-disabled="true">Contact Us</a>
         </li>

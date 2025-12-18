@@ -1,2 +1,10 @@
 com/rianscorp/praktikum_jsp_pekan12/JakartaRestConfiguration.class
+com/mycompany/javaweb/JakartaRestConfiguration.class
 com/rianscorp/praktikum_jsp_pekan12/resources/JakartaEE10Resource.class
+dao/JenisDAO.class
+model/Jenis.class
+model/Produk.class
+com/mycompany/javaweb/resources/JakartaEE10Resource.class
+util/KoneksiDB.class
+dao/ProdukDAO.class
+controller/ProdukController.class

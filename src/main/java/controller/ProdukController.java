@@ -12,40 +12,43 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "ProdukController", urlPatterns = {"/ProdukController"})
 public class ProdukController extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+    // Menangani Hapus (via URL link)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String aksi = request.getParameter("aksi");
+        String id = request.getParameter("id");
+        
+        if ("hapus".equals(aksi) && id != null) {
+            new ProdukDAO().hapus(Integer.parseInt(id));
+        }
+        // Redirect kembali ke index.jsp?halaman=produk sesuai sistem main.jsp Anda
+        response.sendRedirect("index.jsp?halaman=produk");
+    }
 
+    // Menangani Simpan dan Update (via Form POST)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String aksi = request.getParameter("aksi");
+        ProdukDAO dao = new ProdukDAO();
         
-        if (aksi != null && aksi.equals("tambah")) {
-            try {
-                // Mengambil input dari form tambah_produk.jsp
-                String kode = request.getParameter("kode");
-                String nama = request.getParameter("nama");
-                double harga = Double.parseDouble(request.getParameter("harga"));
-                int stok = Integer.parseInt(request.getParameter("stok"));
-                int idjenis = Integer.parseInt(request.getParameter("idjenis"));
+        try {
+            Produk p = new Produk();
+            p.setKode(request.getParameter("kode"));
+            p.setNama(request.getParameter("nama"));
+            p.setHarga(Double.parseDouble(request.getParameter("harga")));
+            p.setStok(Integer.parseInt(request.getParameter("stok")));
+            p.setIdjenis(Integer.parseInt(request.getParameter("idjenis")));
 
-                Produk p = new Produk();
-                p.setKode(kode);
-                p.setNama(nama);
-                p.setHarga(harga);
-                p.setStok(stok);
-                p.setIdjenis(idjenis);
-
-                ProdukDAO dao = new ProdukDAO();
+            if ("tambah".equals(aksi)) {
                 dao.simpan(p);
-
-                // Setelah berhasil, arahkan kembali ke tabel produk
-                response.sendRedirect("index.jsp?halaman=produk");
-                
-            } catch (Exception e) {
-                System.out.println("Error di ProdukController: " + e.getMessage());
-                response.sendRedirect("index.jsp?halaman=produk");
+            } else if ("ubah".equals(aksi)) {
+                p.setId(Integer.parseInt(request.getParameter("id")));
+                dao.ubah(p);
             }
-        }
+        } catch (Exception e) { e.printStackTrace(); }
+        
+        response.sendRedirect("index.jsp?halaman=produk");
     }
 }
